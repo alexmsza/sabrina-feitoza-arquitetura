@@ -25,7 +25,7 @@ export const ContactPage: React.FC<ContactPageProps> = () => {
       `📐 *Metragem Estimada:* ${formData.metragem || 'A definir'}\n` +
       `✨ *Estilo Desejado:* ${formData.estilo}\n` +
       `📝 *Desejos & Objetivos:* ${formData.mensagem || 'Gostaria de agendar uma reunião inicial.'}\n\n` +
-      `Envio através do seu site sabrinafeitoza.vercel.app`;
+      `Envio através do seu site https://sabrinafeittozaarq.vercel.app`;
 
     const encoded = encodeURIComponent(textPayload);
     const waUrl = `https://wa.me/5581994164831?text=${encoded}`;

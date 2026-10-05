@@ -81,7 +81,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
         <div className="footer-bottom-bar">
           <div>© {new Date().getFullYear()} Sabrina Feitoza Arquitetura. Todos os direitos reservados.</div>
-          <div style={{ color: 'var(--accent-gold)' }}>sabrinafeitoza.vercel.app</div>
+          <div style={{ color: 'var(--accent-gold)' }}>sabrinafeittozaarq.vercel.app</div>
         </div>
       </div>
     </footer>

@@ -26,7 +26,7 @@ Web application de alto padrão desenvolvida em **React 19 + TypeScript + Vite**
 - **Bundler:** Vite 6
 - **Ícones & UI:** Lucide React
 - **Estilização:** CSS Vanilla com Design Tokens e tipografia Google Fonts (*Cormorant Garamond* & *Plus Jakarta Sans*)
-- **Deploy:** Otimizado para **Vercel** (`sabrinafeitoza.vercel.app`)
+- **Deploy:** Otimizado para **Vercel** ([sabrinafeittozaarq.vercel.app](https://sabrinafeittozaarq.vercel.app/))
 
 ---
 
