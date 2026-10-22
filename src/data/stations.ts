@@ -138,22 +138,28 @@ export const STATIONS: Station[] = [
 
 export const VIDEOS = [
   {
-    id: "dolly",
-    title: "Caminhada até a Capela (Dolly)",
-    file: "/assets/videos/caminhada_capela_dolly.mp4",
-    duration: "4K Cinema"
-  },
-  {
-    id: "flythrough",
-    title: "Voo de Drone pelo Boulevard",
+    id: "portaria",
+    title: "Pórtico Monumental & Fonte (Área 01)",
     file: "/assets/videos/drone_flythrough.mp4",
-    duration: "4K Aerial"
+    duration: "FHD Cinema"
   },
   {
-    id: "tour",
-    title: "Tour Aéreo Panorâmico Masterplan",
+    id: "dolly",
+    title: "Caminhada até a Capela (Piso Intertravado)",
+    file: "/assets/videos/caminhada_capela_dolly.mp4",
+    duration: "FHD Cinema"
+  },
+  {
+    id: "travessia",
+    title: "Travessia Portaria & Alameda da Capela",
     file: "/assets/videos/drone_tour_completo.mp4",
-    duration: "Masterplan View"
+    duration: "FHD Cinema"
+  },
+  {
+    id: "capela_int",
+    title: "Imersão Interna na Capela A-Frame",
+    file: "/assets/videos/capela_interior.mp4",
+    duration: "Interior Walk"
   },
   {
     id: "mercado",
