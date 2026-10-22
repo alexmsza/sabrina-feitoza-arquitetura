@@ -39,10 +39,10 @@ export const ContactPage: React.FC<ContactPageProps> = () => {
       <div className="container">
         <div style={{ textAlign: 'center', maxWidth: '680px', margin: '0 auto' }}>
           <span className="section-label">Contato & Briefing</span>
-          <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '3.2rem', color: 'var(--text-main)', marginBottom: '1rem', lineHeight: 1.15 }}>
+          <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2.2rem, 5vw, 3.2rem)', color: 'var(--text-main)', marginBottom: '1rem', lineHeight: 1.15 }}>
             Vamos dar vida ao seu projeto?
           </h1>
-          <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem' }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 'clamp(0.95rem, 2vw, 1.1rem)' }}>
             Preencha o formulário abaixo para enviar um briefing detalhado diretamente ao WhatsApp de Sabrina Feitoza.
           </p>
         </div>

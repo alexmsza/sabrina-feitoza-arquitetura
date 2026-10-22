@@ -162,7 +162,7 @@ export const WalkthroughPage: React.FC<WalkthroughPageProps> = ({ onNavigate }) 
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [stationIndex, displayMode, isAudioOn]);
 
-  // Pan / Look Around Handlers
+  // Pan / Look Around Handlers (Mouse + Touch)
   const handleMouseDown = (e: React.MouseEvent) => {
     setIsDragging(true);
     dragStartRef.current = { x: e.clientX, y: e.clientY };
@@ -181,6 +181,31 @@ export const WalkthroughPage: React.FC<WalkthroughPageProps> = ({ onNavigate }) 
   };
 
   const handleMouseUp = () => {
+    if (isDragging) {
+      setIsDragging(false);
+      setPan({ x: 0, y: 0 });
+    }
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length !== 1) return;
+    setIsDragging(true);
+    dragStartRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging || e.touches.length !== 1) return;
+    const deltaX = (e.touches[0].clientX - dragStartRef.current.x) * 0.15;
+    const deltaY = (e.touches[0].clientY - dragStartRef.current.y) * 0.15;
+
+    setPan(prev => ({
+      x: Math.max(-24, Math.min(24, prev.x + deltaX)),
+      y: Math.max(-14, Math.min(14, prev.y + deltaY))
+    }));
+    dragStartRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+  };
+
+  const handleTouchEnd = () => {
     if (isDragging) {
       setIsDragging(false);
       setPan({ x: 0, y: 0 });
@@ -290,68 +315,84 @@ export const WalkthroughPage: React.FC<WalkthroughPageProps> = ({ onNavigate }) 
           {displayMode === 'walk' ? (
             <>
               {/* Top Station Status */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 2rem', background: 'rgba(18,16,14,0.85)', borderBottom: '1px solid var(--border-dark)', flexWrap: 'wrap', gap: '0.5rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
-                  <span style={{ background: 'var(--accent-gold-soft)', border: '1px solid var(--border-gold)', color: 'var(--accent-gold)', padding: '0.25rem 0.75rem', borderRadius: 'var(--radius-full)', fontSize: '0.8rem', fontWeight: 700 }}>
+              <div className="tour-station-status-bar">
+                <div className="tour-station-title-row">
+                  <span className="tour-step-badge">
                     Passo {currentStation.id} de {STATIONS.length}
                   </span>
-                  <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: '#fff' }}>
+                  <h3 className="tour-station-heading">
                     {currentStation.title}
                   </h3>
                 </div>
-                <div style={{ fontSize: '0.85rem', color: 'var(--text-light-muted)' }}>
+                <div className="tour-station-desc">
                   {currentStation.description}
                 </div>
               </div>
 
-              {/* Viewport Canvas */}
-              <div 
-                className={`tour-viewport ${isWalking ? 'is-walking' : ''} ${lighting !== 'day' ? `light-${lighting}` : ''}`}
-                onMouseDown={handleMouseDown}
-                onMouseMove={handleMouseMove}
-                onMouseUp={handleMouseUp}
-              >
-                <img 
-                  className="tour-stage-image"
-                  src={currentStation.image}
-                  alt={currentStation.title}
-                  style={{
-                    transform: isDragging 
-                      ? `translate(${pan.x}px, ${pan.y}px) scale(1.05)`
-                      : 'translate(0px, 0px) scale(1)'
-                  }}
-                />
-
-                {/* Hotspots */}
-                {currentStation.hotspots.map((hp, idx) => (
-                  <div
-                    key={idx}
-                    className={`stage-hotspot ${activeHotspot === idx ? 'active' : ''}`}
-                    style={{ left: `${hp.x}%`, top: `${hp.y}%` }}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setActiveHotspot(activeHotspot === idx ? null : idx);
+              {/* Viewport & Controls Wrapper */}
+              <div className="tour-stage-wrapper">
+                <div 
+                  className={`tour-viewport ${isWalking ? 'is-walking' : ''} ${lighting !== 'day' ? `light-${lighting}` : ''}`}
+                  onMouseDown={handleMouseDown}
+                  onMouseMove={handleMouseMove}
+                  onMouseUp={handleMouseUp}
+                  onTouchStart={handleTouchStart}
+                  onTouchMove={handleTouchMove}
+                  onTouchEnd={handleTouchEnd}
+                >
+                  <img 
+                    className="tour-stage-image"
+                    src={currentStation.image}
+                    alt={currentStation.title}
+                    style={{
+                      transform: isDragging 
+                        ? `translate(${pan.x}px, ${pan.y}px) scale(1.05)`
+                        : 'translate(0px, 0px) scale(1)'
                     }}
-                  >
-                    <div className="hotspot-inner-dot" />
-                    <div className="stage-hotspot-card">
-                      <h4>{hp.title}</h4>
-                      <p>{hp.desc}</p>
+                  />
+
+                  {/* Hotspots */}
+                  {currentStation.hotspots.map((hp, idx) => (
+                    <div
+                      key={idx}
+                      className={`stage-hotspot ${activeHotspot === idx ? 'active' : ''}`}
+                      style={{ left: `${hp.x}%`, top: `${hp.y}%` }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setActiveHotspot(activeHotspot === idx ? null : idx);
+                      }}
+                    >
+                      <div className="hotspot-inner-dot" />
+                      <div className="stage-hotspot-card">
+                        <h4>{hp.title}</h4>
+                        <p>{hp.desc}</p>
+                      </div>
                     </div>
+                  ))}
+
+                  {/* HUD Compass & Keys */}
+                  <div className="tour-hud-compass">
+                    <Compass size={15} color="var(--accent-gold)" />
+                    <span>{currentStation.heading}° NE</span>
                   </div>
-                ))}
 
-                {/* HUD Compass & Keys */}
-                <div style={{ position: 'absolute', top: '1.5rem', left: '1.5rem', background: 'rgba(18,16,14,0.7)', backdropFilter: 'blur(10px)', border: '1px solid var(--border-dark)', borderRadius: 'var(--radius-full)', padding: '0.4rem 1rem', fontSize: '0.8rem', color: '#fff', display: 'flex', alignItems: 'center', gap: '0.5rem', zIndex: 10 }}>
-                  <Compass size={16} color="var(--accent-gold)" />
-                  <span>{currentStation.heading}° NE</span>
+                  <div className="tour-hud-hint">
+                    <span>Arraste para olhar</span>
+                    <span className="hud-key-pill">W / ↑</span>
+                    <span>Avançar</span>
+                  </div>
                 </div>
 
-                <div style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'rgba(18,16,14,0.7)', backdropFilter: 'blur(10px)', border: '1px solid var(--border-dark)', borderRadius: 'var(--radius-full)', padding: '0.4rem 1rem', fontSize: '0.78rem', color: 'var(--text-light-muted)', display: 'flex', alignItems: 'center', gap: '0.6rem', zIndex: 10 }}>
-                  <span>Arraste para olhar</span>
-                  <span style={{ background: 'rgba(255,255,255,0.15)', padding: '0.15rem 0.45rem', borderRadius: '4px', color: '#fff', fontWeight: 700 }}>W / ↑</span>
-                  <span>Avançar</span>
-                </div>
+                {/* Mobile Hotspot Detail Banner (Never Clipped) */}
+                {activeHotspot !== null && currentStation.hotspots[activeHotspot] && (
+                  <div className="mobile-hotspot-banner" onClick={() => setActiveHotspot(null)}>
+                    <div>
+                      <strong>{currentStation.hotspots[activeHotspot].title}</strong>
+                      <p>{currentStation.hotspots[activeHotspot].desc}</p>
+                    </div>
+                    <span className="mobile-hotspot-close">✕</span>
+                  </div>
+                )}
 
                 {/* Walk Controls */}
                 <div className="stage-walk-controls">
@@ -384,7 +425,7 @@ export const WalkthroughPage: React.FC<WalkthroughPageProps> = ({ onNavigate }) 
                     <span style={{ fontSize: '0.75rem', color: 'var(--accent-gold)', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 600 }}>Radar Ativo</span>
                   </div>
 
-                  <div style={{ position: 'relative', width: '100%', aspectRatio: '1', background: '#12100E', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-dark)', overflow: 'hidden' }}>
+                  <div className="tour-minimap-box">
                     <svg viewBox="0 0 320 300" style={{ width: '100%', height: '100%' }}>
                       <path d={routePathD} fill="none" stroke="rgba(197, 160, 89, 0.4)" strokeWidth="3" strokeDasharray="4,4" />
                       <path d={renderSightCone()} fill="rgba(212, 175, 55, 0.28)" pointerEvents="none" />
@@ -437,16 +478,18 @@ export const WalkthroughPage: React.FC<WalkthroughPageProps> = ({ onNavigate }) 
             </>
           ) : (
             /* Video Cinema Mode */
-            <div className="tour-video-stage">
-              <video 
-                key={currentVideo}
-                className="tour-video-player"
-                controls 
-                autoPlay 
-                playsInline
-              >
-                <source src={currentVideo} type="video/mp4" />
-              </video>
+            <div className="tour-video-wrapper">
+              <div className="tour-video-stage">
+                <video 
+                  key={currentVideo}
+                  className="tour-video-player"
+                  controls 
+                  autoPlay 
+                  playsInline
+                >
+                  <source src={currentVideo} type="video/mp4" />
+                </video>
+              </div>
 
               <div className="tour-video-selector">
                 {VIDEOS.map((vid) => (
@@ -466,14 +509,10 @@ export const WalkthroughPage: React.FC<WalkthroughPageProps> = ({ onNavigate }) 
         </div>
 
         {/* Bottom Fast Contact Banner */}
-        <div style={{ marginTop: '3rem', background: 'var(--bg-dark-card)', padding: '2.5rem 3rem', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border-gold)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.5rem' }}>
+        <div className="tour-fast-contact-banner">
           <div>
-            <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.8rem', color: '#fff', marginBottom: '0.4rem' }}>
-              Inspirado pelo Villa Bella III?
-            </h3>
-            <p style={{ color: 'var(--text-light-muted)', fontSize: '0.95rem' }}>
-              Desenvolva o projeto autoral da sua casa com visualização 3D hiper-realista.
-            </p>
+            <h3>Inspirado pelo Villa Bella III?</h3>
+            <p>Desenvolva o projeto autoral da sua casa com visualização 3D hiper-realista.</p>
           </div>
 
           <button className="btn-luxury-primary" onClick={() => onNavigate('contato')}>

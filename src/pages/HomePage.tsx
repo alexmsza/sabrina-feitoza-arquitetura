@@ -123,11 +123,11 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       </section>
 
       {/* 4. METHODOLOGY (4 STEPS) */}
-      <section style={{ padding: '6rem 0', background: 'var(--bg-secondary)' }}>
+      <section style={{ padding: 'clamp(3.5rem, 6vw, 6rem) 0', background: 'var(--bg-secondary)' }}>
         <div className="container">
-          <div style={{ textAlign: 'center', maxWidth: '680px', margin: '0 auto 3.5rem auto' }}>
+          <div style={{ textAlign: 'center', maxWidth: '680px', margin: '0 auto 3rem auto' }}>
             <span className="section-label">Metodologia Autoral</span>
-            <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '2.8rem', color: 'var(--text-main)', marginBottom: '1rem' }}>
+            <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2rem, 4.5vw, 2.8rem)', color: 'var(--text-main)', marginBottom: '1rem', lineHeight: 1.15 }}>
               Processo claro do primeiro traço à entrega
             </h2>
             <p style={{ color: 'var(--text-muted)', fontSize: '1.05rem' }}>
@@ -164,12 +164,12 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       </section>
 
       {/* 5. PORTFOLIO SNAPSHOT */}
-      <section style={{ padding: '6rem 0', background: 'var(--bg-primary)' }}>
+      <section style={{ padding: 'clamp(3.5rem, 6vw, 6rem) 0', background: 'var(--bg-primary)' }}>
         <div className="container">
-          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: '3rem', flexWrap: 'wrap', gap: '1.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: '2.5rem', flexWrap: 'wrap', gap: '1.2rem' }}>
             <div>
               <span className="section-label">Galeria Autoral</span>
-              <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '2.8rem', color: 'var(--text-main)', lineHeight: 1.15 }}>
+              <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2rem, 4.5vw, 2.8rem)', color: 'var(--text-main)', lineHeight: 1.15 }}>
                 Projetos & Conceitos
               </h2>
             </div>
@@ -250,10 +250,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       </section>
 
       {/* 6. CALL TO ACTION */}
-      <section style={{ padding: '5rem 0', background: 'var(--bg-dark)', color: '#fff', textAlign: 'center' }}>
+      <section style={{ padding: 'clamp(3.5rem, 6vw, 5rem) 0', background: 'var(--bg-dark)', color: '#fff', textAlign: 'center' }}>
         <div className="container">
           <span className="section-label">Vamos conversar?</span>
-          <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '3rem', color: '#FAF8F5', marginBottom: '1.2rem' }}>
+          <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2.1rem, 5vw, 3rem)', color: '#FAF8F5', marginBottom: '1rem', lineHeight: 1.15 }}>
             Pronto para transformar seu espaço?
           </h2>
           <p style={{ color: 'var(--text-light-muted)', maxWidth: '580px', margin: '0 auto 2.5rem auto', fontSize: '1.1rem' }}>
