@@ -36,3 +36,15 @@ Thumbs.db
 *.njsproj
 *.sln
 *.sw?
+
+# Watermark engine & raw asset processing
+DRIVE_*
+midias_watermarked/
+areas/
+watermark_*.png
+watermark_engine.py
+logo marca.jpeg
+__pycache__/
+.gemini/
+graphify-out/
+GEMINI.md

@@ -182,34 +182,67 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           <div className="portfolio-grid">
             <div className="portfolio-card" onClick={() => onNavigate('tour-villa-bella')} style={{ cursor: 'pointer' }}>
               <div className="portfolio-card-media">
-                <img src="/assets/images/02_portao_frente.jpg" alt="Pórtico Villa Bella III" />
+                <img src="/assets/images/station_01_portaria_intertravado.jpg" alt="Pórtico Villa Bella III" />
               </div>
               <div className="portfolio-card-body">
-                <span style={{ fontSize: '0.75rem', letterSpacing: '1px', textTransform: 'uppercase', color: 'var(--accent-gold)', fontWeight: 600 }}>Condomínio Horizontal</span>
+                <span style={{ fontSize: '0.75rem', letterSpacing: '1px', textTransform: 'uppercase', color: 'var(--accent-gold)', fontWeight: 600 }}>Área 01 — Portaria</span>
                 <h3>Pórtico & Guarita Monumental</h3>
-                <p>Villa Bella III — Linhas contemporâneas e ripados nobres.</p>
+                <p>Villa Bella III — Piso intertravado de concreto permeável, fonte central e pórtico contemporâneo.</p>
               </div>
             </div>
 
             <div className="portfolio-card" onClick={() => onNavigate('tour-villa-bella')} style={{ cursor: 'pointer' }}>
               <div className="portfolio-card-media">
-                <img src="/assets/images/04_entrada_lateral.jpg" alt="Jardins e Muro Verde" />
+                <img src="/assets/images/station_06_mercado_solar.jpg" alt="Mercado Autônomo e Carport Solar" />
               </div>
               <div className="portfolio-card-body">
-                <span style={{ fontSize: '0.75rem', letterSpacing: '1px', textTransform: 'uppercase', color: 'var(--accent-gold)', fontWeight: 600 }}>Biofilia & Paisagismo</span>
-                <h3>Alameda Verde & Iluminação Cênica</h3>
-                <p>Composição botânica tropical e iluminação suave 3000K.</p>
+                <span style={{ fontSize: '0.75rem', letterSpacing: '1px', textTransform: 'uppercase', color: 'var(--accent-gold)', fontWeight: 600 }}>Área 02 — Conveniência</span>
+                <h3>Mercado Autônomo & Carport Solar</h3>
+                <p>Pavilhão moderno 24/7 integrado a carport fotovoltaico para recarga de veículos elétricos.</p>
               </div>
             </div>
 
             <div className="portfolio-card" onClick={() => onNavigate('tour-villa-bella')} style={{ cursor: 'pointer' }}>
               <div className="portfolio-card-media">
-                <img src="/assets/images/08_capela_aframe.jpg" alt="Capela A-Frame" />
+                <img src="/assets/images/station_07_complexo_aquatico.jpg" alt="Complexo Aquático e Bangalôs" />
+              </div>
+              <div className="portfolio-card-body">
+                <span style={{ fontSize: '0.75rem', letterSpacing: '1px', textTransform: 'uppercase', color: 'var(--accent-gold)', fontWeight: 600 }}>Área 03 — Lazer Resort</span>
+                <h3>Complexo Aquático & Bangalôs</h3>
+                <p>Piscinas cristalinas em tons turquesa, decks em madeira nobre e bangalôs gourmet privativos.</p>
+              </div>
+            </div>
+
+            <div className="portfolio-card" onClick={() => onNavigate('tour-villa-bella')} style={{ cursor: 'pointer' }}>
+              <div className="portfolio-card-media">
+                <img src="/assets/images/station_02_boulevard_alameda.jpg" alt="Boulevard e Alamedas" />
+              </div>
+              <div className="portfolio-card-body">
+                <span style={{ fontSize: '0.75rem', letterSpacing: '1px', textTransform: 'uppercase', color: 'var(--accent-gold)', fontWeight: 600 }}>Urbanismo & Biofilia</span>
+                <h3>Boulevard Arborizado & Alamedas</h3>
+                <p>Ampla via em piso intertravado contínuo, fiação subterrânea e canteiros verdes exuberantes.</p>
+              </div>
+            </div>
+
+            <div className="portfolio-card" onClick={() => onNavigate('tour-villa-bella')} style={{ cursor: 'pointer' }}>
+              <div className="portfolio-card-media">
+                <img src="/assets/images/station_05_capela_aframe.jpg" alt="Capela A-Frame" />
               </div>
               <div className="portfolio-card-body">
                 <span style={{ fontSize: '0.75rem', letterSpacing: '1px', textTransform: 'uppercase', color: 'var(--accent-gold)', fontWeight: 600 }}>Espaço Ecumênico</span>
                 <h3>Capela Sagrada Villa Bella</h3>
-                <p>Geometria A-Frame em madeira engenheirada e vidros reflexivos.</p>
+                <p>Geometria A-Frame em madeira engenheirada, piso cerâmico cinza fosco e espelho d'água.</p>
+              </div>
+            </div>
+
+            <div className="portfolio-card" onClick={() => onNavigate('tour-villa-bella')} style={{ cursor: 'pointer' }}>
+              <div className="portfolio-card-media">
+                <img src="/assets/images/station_10_salao_de_festas.jpg" alt="Salão de Festas e Pátio Gourmet" />
+              </div>
+              <div className="portfolio-card-body">
+                <span style={{ fontSize: '0.75rem', letterSpacing: '1px', textTransform: 'uppercase', color: 'var(--accent-gold)', fontWeight: 600 }}>Área 06 — Eventos</span>
+                <h3>Salão de Festas & Pátio Gourmet</h3>
+                <p>Volumetria contemporânea em pedra natural com LED vertical, carport solar e pátio em intertravado.</p>
               </div>
             </div>
           </div>

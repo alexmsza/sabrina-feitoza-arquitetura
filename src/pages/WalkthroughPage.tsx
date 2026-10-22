@@ -34,6 +34,18 @@ export const WalkthroughPage: React.FC<WalkthroughPageProps> = ({ onNavigate }) 
   const [pan, setPan] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const dragStartRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+  const activeTimelineCardRef = useRef<HTMLDivElement | null>(null);
+
+  // Auto-scroll timeline to active step
+  useEffect(() => {
+    if (activeTimelineCardRef.current) {
+      activeTimelineCardRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center'
+      });
+    }
+  }, [stationIndex]);
 
   // Web Audio Context Refs
   const audioCtxRef = useRef<AudioContext | null>(null);
@@ -407,6 +419,7 @@ export const WalkthroughPage: React.FC<WalkthroughPageProps> = ({ onNavigate }) 
                     {STATIONS.map((st, idx) => (
                       <div
                         key={st.id}
+                        ref={idx === stationIndex ? activeTimelineCardRef : null}
                         className={`timeline-step-card ${idx === stationIndex ? 'active' : ''}`}
                         onClick={() => goToStation(idx)}
                       >
