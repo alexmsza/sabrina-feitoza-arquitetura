@@ -102,7 +102,8 @@ export const STATIONS: Station[] = [
     description: "Templo em madeira laminada colada e grandes panos de vidro que conectam o sagrado à natureza.",
     hotspots: [
       { x: 50, y: 35, title: "Madeira Engenheirada", desc: "Vigas de alta precisão estética e sustentabilidade comprovada." },
-      { x: 50, y: 62, title: "Fachada de Vidro Panorâmico", desc: "Transparência total que permite a entrada de luz zenital suave." }
+      { x: 50, y: 62, title: "Fachada de Vidro Panorâmico", desc: "Transparência total que permite a entrada de luz zenital suave." },
+      { x: 50, y: 85, title: "Piso em Cerâmica Cinza Fosca", desc: "Acabamento nobre e atemporal, substituindo cimento queimado para maior conforto visual e reflexão suave de luz natural." }
     ]
   }
 ];
